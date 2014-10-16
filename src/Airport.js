@@ -10,7 +10,23 @@ Airport.prototype.land = function(plane) {
 };
 
 Airport.prototype.takeoff = function(plane) {
-	if(this.planes.indexOf(plane) !== -1) {
-		return this.planes.splice(this.planes.indexOf(plane), 1)[0]
+	if(this._isLanded(plane)) {
+		return this._clearToTakeOff(plane);
 	}
-	};
+};
+
+Airport.prototype._clearToTakeOff = function(plane) {
+	return this._clearManyPlanesToTakeOff((plane), 1)[0];
+};
+
+Airport.prototype._clearManyPlanesToTakeOff = function(plane, numberOfPlanes) {
+	return this.planes.splice(this._findLocationOf(plane), numberOfPlanes);
+};
+
+Airport.prototype._isLanded = function(plane) {
+	return this._findLocationOf(plane) !== -1
+};
+
+Airport.prototype._findLocationOf = function(plane) {
+	return this.planes.indexOf(plane);
+};
