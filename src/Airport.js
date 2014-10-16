@@ -30,3 +30,7 @@ Airport.prototype._isLanded = function(plane) {
 Airport.prototype._findLocationOf = function(plane) {
 	return this.planes.indexOf(plane);
 };
+
+Airport.prototype.isFull = function(){
+	return this.planes.length === 40;
+};

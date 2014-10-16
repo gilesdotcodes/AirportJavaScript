@@ -5,6 +5,12 @@ describe('The Airport', function() {
 		plane = new Plane;
 	});
 
+	fillUp = function() {
+		for(var i=0; i < 40; i++) {
+			airport.land(plane)
+		}
+	};
+
 	it('can have planes', function() {
 		expect(airport.planes).toEqual([])
 	});
@@ -39,4 +45,14 @@ describe('The Airport', function() {
 		airport.land(helicopter);
 		expect(airport.takeoff(plane)).toEqual(undefined)
 	});
+
+	it('should report if it is full', function() {
+		fillUp(airport);
+		expect(airport.isFull()).toBe(true);
+	});
+
+	it('should report if it is not full', function() {
+		expect(airport.isFull()).toBe(false);
+	});
+
 });
